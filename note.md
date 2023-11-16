@@ -15,7 +15,7 @@ J'utilise Geocoding : pour déterminer la longitude et latitude de la ville
 puis Open-meteo pour obtenir la température à partir de la longitude et latitude.
 
 - toujours verifier les url bien correctes avec l'objet à récupérer
-https://geocoding-api.open-meteo.com/v1/search?name=paris&count=1&language=fr
+- https://geocoding-api.open-meteo.com/v1/search?name=paris&count=1&language=fr
 - qui récupère la latitude et longitude
-https://api.open-meteo.com/v1/forecast?latitude=43.297&longitude=5.3811&hourly=temperature_2m
+- https://api.open-meteo.com/v1/forecast?latitude=43.297&longitude=5.3811&hourly=temperature_2m
 - qui indique la température
