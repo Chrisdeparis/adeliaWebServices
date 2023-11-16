@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+// Supposons que l'URL soit "http://example.com/?city=Marseille"
+// Créer un objet URL à partir de l'URL actuelle
+const url = new URL(window.location.href);
+// Récupérer la valeur du paramètre 'city' de l'URL
+const city = url.searchParams.get('city');
+// console.log(city); // Output: "Marseille"
+
+
+
+
+
+// Fonction asynchrone pour obtenir les coordonnées de la ville
+async function getCoordinates(city) {
+  try {
+    const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=fr&format=json`);
+    const data = await response.json();
+
+    // Vérifier si 'results' est défini et n'est pas vide
+    if (data.results && data.results.length > 0) {
+      const obj = data.results[0];
+
+      if (obj.latitude && obj.longitude) {
+        return {
+          latitude: obj.latitude,
+          longitude: obj.longitude
+        };
+      } else {
+        throw new Error('Coordonnées non disponibles pour la ville spécifiée.');
+      }
+    } else {
+      throw new Error('Aucun résultat trouvé pour la ville spécifiée.');
+    }
+  } catch (error) {
+    console.error('Erreur de géocodage :', error);
+    throw error;
+  }
+}
+
+
+// Fonction asynchrone pour obtenir la température en fonction des coordonnées
+async function getTemperature(city) {
+  try {
+    const { latitude, longitude } = await getCoordinates(city);
+    const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m`;
+
+    const response = await fetch(apiUrl);
+    const { hourly } = await response.json();
+    const temperature = hourly?.temperature_2m?.[0];
+
+    if (temperature !== undefined) {
+      return temperature;
+    } else {
+      throw new Error('Données de température non disponibles pour la ville spécifiée.');
+    }
+  } catch (error) {
+    console.error('Erreur lors de la récupération de la température :', error);
+    throw error;
+  }
+}
+
+
+
+// console.log(city); // Output: "Paris"
+getTemperature(city)
+  .then(temperature => console.log(`La température actuelle à ${city} est de ${temperature}°C.`))
+  .catch(error => console.error('Erreur générale :', error));
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
