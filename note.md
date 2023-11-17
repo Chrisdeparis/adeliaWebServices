@@ -19,3 +19,7 @@ puis Open-meteo pour obtenir la température à partir de la longitude et latitu
 - qui récupère la latitude et longitude
 - https://api.open-meteo.com/v1/forecast?latitude=43.297&longitude=5.3811&hourly=temperature_2m
 - qui indique la température
+
+
+transformer json en xml
+filtrer avec xpath

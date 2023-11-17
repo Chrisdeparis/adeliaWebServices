@@ -13,10 +13,6 @@ const url = new URL(window.location.href);
 const city = url.searchParams.get('city');
 // console.log(city); // Output: "Marseille"
 
-
-
-
-
 // Fonction asynchrone pour obtenir les coordonnées de la ville
 async function getCoordinates(city) {
   try {
@@ -44,7 +40,6 @@ async function getCoordinates(city) {
   }
 }
 
-
 // Fonction asynchrone pour obtenir la température en fonction des coordonnées
 async function getTemperature(city) {
   try {
@@ -66,14 +61,10 @@ async function getTemperature(city) {
   }
 }
 
-
-
 // console.log(city); // Output: "Paris"
 getTemperature(city)
   .then(temperature => console.log(`La température actuelle à ${city} est de ${temperature}°C.`))
   .catch(error => console.error('Erreur générale :', error));
-
-
 
     </script>
 </head>
