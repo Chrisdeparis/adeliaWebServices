@@ -37,16 +37,15 @@ traiter_proc log_reponse_ws
 si httpstatus = 200;201
 #
 Code retour OK - Tentative de récupération et impression etiquette
-* Ouverture de 1' XML de la réponse
+* Ouverture de l' XML de la réponse
 xml_ouvrir xml_bpost_reponse lecture *var_doc(reponse)
 si *code_retour = *normal
-w_trace = w_trace_bloc /// ajouter_trace w_trace *debug
+  w_trace = w_trace_bloc /// ' - OUVERTURE DU DOM XML - Reponse XML - OK' 
+  ajouter_trace w_trace *debug
 sinon
-OUVERTURE DU DOM XML Reponse XML - OK'
-traiter_proc lib_err_adelia 'XML_OUVRIR
-OUVERTURE DU DOM XML - code_retour
-Reponse XML - KO'
-ajouter_trace w_trace *erreur
+  w_trace = wtrace_bloc /// ' - OUVERTURE DU DOM XML - Reponse XML - KO' 
+  traiter_proc lib_err_adelia 'XML_OUVRIR' *code_retour 
+  ajouter_trace w_trace *erreur
 fin
 w_trace = w_trace_bloc !!!
 * Définition des names spaces contenu dans le XML de réponse pour un statut OK traiter_proc decl_namespace
