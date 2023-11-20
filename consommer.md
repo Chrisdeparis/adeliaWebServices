@@ -2,7 +2,7 @@ Pour consommer
 
 utiliser http_executer
 
-```
+```sql
 ﻿
 
 * Gestion de la requête HTTP et appel du WebService (via param) :
